@@ -11,9 +11,9 @@ REGION="us-east1"
 FIREWALL="notebook-rules"
 DISK="high-memory-instance"
 IMAGE="ubuntu-1604-xenial-v20170619a"
-PORT="8765"
+PORT=8765
 
-#TODO: Hay un problema con la Imagen, parece q hay q poner el full url para cargarla
+#TODO: Theres is an issue with the image I am not allowed to use ubuntu somehow
 
 
 
@@ -70,7 +70,7 @@ highMemoryInstanceFromZero(){
     --tags http-server,https-server \
     --address $IPID
 
-    gcloud compute firewall-rules create $FIREWALL --allow tcp:7000
+    gcloud compute firewall-rules create $FIREWALL --allow tcp:$PORT
 
 
 }
@@ -137,7 +137,7 @@ deleteMenu(){
     clear
     echo
     echo  "\t\t\tDelete:\n"
-    echo  "\t1. Instance, Address, Disk"
+    echo  "\t1. Instance, Address, Disk and Firewall"
     echo  "\t2. Instance, Address,"
     echo  "\t3. Instance"
     echo  "\t4. Address, Disk"
@@ -160,6 +160,7 @@ delete(){
     gcloud compute addresses delete $ADRESSNAME --region $REGION
     gcloud compute instances delete $INSTANCE --zone $ZONE
     gcloud compute disks delete $DISK --zone $ZONE
+    gcloud compute firewall-rules delete $FIREWALL
     ;;
     2)
     gcloud compute addresses delete $ADRESSNAME --region $REGION
