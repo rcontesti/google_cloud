@@ -3,8 +3,9 @@
 #Install from git
 #sudo apt-get install git
 #git clone https://github.com/rcontesti/google_cloud
-#./install1.sh
 
+
+#TODO: falta instalar tensorflow
 sudo apt-get install unzip
 sudo apt-get install bzip2
 mkdir downloads

@@ -17,6 +17,7 @@ PORT=8765
 
 
 
+
 menu() {
     echo
     echo  "\t\t\tGoogle Cloud Menu\n"
@@ -24,6 +25,9 @@ menu() {
     echo  "\t2. Create Resources (Instance(VM), Disk, Address, Firewall)"
     echo  "\t3. Delete Resources"
     echo  "\t4. Connect SSH"
+    echo  "\t5. Install Packages"
+    echo  "\t6. Config Jupyter Ports"
+    echo  "\t7. Connect Jupyter Ports"
     echo  "\t0. Exit menu\n\n"
     echo  "\t\tEnter option: "
 
@@ -192,7 +196,40 @@ gcloud compute ssh $INSTANCE --zone=$ZONE
 }
 
 
+inst(){
+    #TODO: falta instalar tensorflow
+    sudo apt-get install unzip
+    sudo apt-get install bzip2
+    mkdir downloads
+    cd downloads
+    wget http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh
+    bash Anaconda3-4.0.0-Linux-x86_64.sh
+    cd ..
 
+    echo "Need to exit to install"
+    exit
+}
+
+config(){
+    cd
+    jupyter notebook --generate-config
+    nano /home/rcontesti/.jupyter/jupyter_notebook_config.py
+    echo '''
+    Add these lines after configurable configuration and save
+
+    c = get_config()
+    c.NotebookApp.ip = '*'
+    c.NotebookApp.open_browser = False
+    c.NotebookApp.port = 8765
+    '''
+}
+
+
+jup(){
+jupyter-notebook --no-browser --port=$PORT
+echo "Open your browser to $IPID:$PORT"
+
+}
 
 
 
@@ -208,6 +245,13 @@ case $option in
     delete ;;
 4)
     connect;;
+5) 
+    inst;;
+6)
+    config;;
+7)
+    jup;;
+
 *)
    clear ;;
 esac
