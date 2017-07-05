@@ -1,8 +1,7 @@
 Instructions
 
 
-'''
-1) Run a_start to create/delete everything
+1) Run [a_start] to create/delete everything
 
 2)Then after connecting
 #sudo apt-get install git
@@ -12,7 +11,6 @@ Instructions
 
 4)Then config
 
-'''
 #cd
 #jupyter notebook --generate-config
 #nano /home/rcontesti/.jupyter/jupyter_notebook_config.py
