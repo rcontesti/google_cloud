@@ -52,7 +52,7 @@ checkStatus() {
 }
 
 highMemoryInstanceFromZero(){
-    #First Reserve an statis IP ADRESS to use during creation
+    #First Reserve an static IP ADRESS to use during creation
     
     gcloud compute addresses create   $ADRESSNAME --region $REGION
     clear
